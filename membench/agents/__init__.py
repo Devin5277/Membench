@@ -8,11 +8,13 @@ from typing import Dict, Type
 
 from membench.agent import AgentAdapter
 from membench.agents.mock_good import MockGoodAgent
+from membench.agents.mock_typical import MockTypicalAgent
 from membench.agents.mock_weak import MockWeakAgent
 from membench.agents.http_agent import KylinBotAdapter, HermesAgentAdapter
 
 REGISTRY: Dict[str, Type[AgentAdapter]] = {
     "mock_good": MockGoodAgent,
+    "mock_typical": MockTypicalAgent,
     "mock_weak": MockWeakAgent,
     "kylinbot": KylinBotAdapter,
     "hermes_agent": HermesAgentAdapter,

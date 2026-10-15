@@ -1,7 +1,7 @@
 """演示录屏辅助脚本:生成自动播放的 HTML 演示 + 可选 MP4。
 
 用法:
-    python scripts/make_demo.py [--agents mock_good,mock_weak] [--out demo] [--seconds 25]
+    python scripts/make_demo.py [--agents mock_good,mock_typical,mock_weak] [--out demo] [--seconds 25]
 
 生成内容(位于 --out 目录):
     index.html     自动播放的幻灯片(全屏打开后即可录屏)
@@ -159,7 +159,7 @@ def build_html(reports, episodes, seconds: int, title: str, radar_ok: bool = Tru
 def main() -> int:
     parser = argparse.ArgumentParser(description="生成演示录屏用的自动播放 HTML 幻灯片")
     parser.add_argument("--dataset", default=None, help="数据集 JSON 路径(默认内置样例)")
-    parser.add_argument("--agents", default="mock_good,mock_weak", help="逗号分隔的智能体名")
+    parser.add_argument("--agents", default="mock_good,mock_typical,mock_weak", help="逗号分隔的智能体名")
     parser.add_argument("--scorer", default="keyword", choices=["keyword", "semantic"])
     parser.add_argument("--out", default="demo", help="输出目录")
     parser.add_argument("--seconds", type=int, default=25, help="每页停留秒数")

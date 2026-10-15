@@ -41,10 +41,17 @@ def test_semantic_scorer() -> None:
         "语义判分下,记忆强智能体总分仍应高于弱智能体"
 
 
+def test_typical_between() -> None:
+    _, reports = run_benchmark(DEFAULT_DATASET, ["mock_good", "mock_typical", "mock_weak"])
+    by_name = {r.agent_name: r for r in reports}
+    assert by_name["mock_good"].overall > by_name["mock_typical"].overall > by_name["mock_weak"].overall, \
+        "拟真智能体总分应介于强/弱智能体之间"
+
+
 def test_agents_registered() -> None:
     from membench.agents import list_agents
     names = list_agents().keys()
-    assert {"mock_good", "mock_weak", "kylinbot", "hermes_agent"} <= set(names), \
+    assert {"mock_good", "mock_typical", "mock_weak", "kylinbot", "hermes_agent"} <= set(names), \
         "应注册模拟智能体与真实智能体骨架"
 
 
@@ -54,6 +61,7 @@ if __name__ == "__main__":
         test_good_beats_weak,
         test_reports_are_explainable,
         test_semantic_scorer,
+        test_typical_between,
         test_agents_registered,
     ]
     for t in tests:

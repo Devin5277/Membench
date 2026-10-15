@@ -118,7 +118,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_run = sub.add_parser("run", help="运行评测并产出报告与雷达图")
     p_run.add_argument("--dataset", default=str(DEFAULT_DATASET), help="数据集 JSON 路径")
-    p_run.add_argument("--agents", default="mock_good,mock_weak", help="逗号分隔的智能体名")
+    p_run.add_argument("--agents", default="mock_good,mock_typical,mock_weak", help="逗号分隔的智能体名")
     p_run.add_argument("--out", default="results", help="结果输出目录 (默认 results)")
     p_run.add_argument("--title", default="智能体长期记忆能力对比", help="雷达图标题")
     p_run.add_argument("--scorer", default="keyword", choices=["keyword", "semantic"],

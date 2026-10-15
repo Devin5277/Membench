@@ -27,7 +27,7 @@ pip install -e .
 # 2. 列出可用的智能体
 membench agents
 
-# 3. 一键运行评测(默认对 mock_good / mock_weak 两个模拟智能体)
+# 3. 一键运行评测(默认对 mock_good / mock_typical / mock_weak 三个模拟智能体)
 membench run
 
 # 等价于
@@ -57,7 +57,7 @@ python scripts/gen_dataset.py --per 20
 membench run --dataset data/generated/episodes.json
 
 # 用自定义数据集、指定智能体、指定输出目录运行
-membench run --dataset mydata/episodes.json --agents mock_good,mock_weak --out myresults
+membench run --dataset mydata/episodes.json --agents mock_good,mock_typical,mock_weak --out myresults
 ```
 
 ## 接入真实智能体
