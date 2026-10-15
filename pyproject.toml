@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "membench"
+version = "0.1.0"
+description = "智能体长期记忆可解释评测框架(membench)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+# 核心零第三方依赖;雷达图需要 matplotlib(可选)
+dependencies = []
+
+[project.optional-dependencies]
+plot = ["matplotlib"]
+
+[project.scripts]
+membench = "membench.cli:main"
+
+[tool.setuptools]
+packages = ["membench", "membench.agents"]
+
+[tool.setuptools.package-data]
+membench = ["data/*.json"]

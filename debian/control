@@ -1,0 +1,11 @@
+Package: membench
+Version: 0.1.0
+Section: utils
+Priority: optional
+Architecture: all
+Depends: python3, python3-matplotlib
+Maintainer: membench <dev@example.com>
+Description: 智能体长期记忆可解释评测框架(membench)
+ 面向 openKylin 操作系统的智能体长期记忆能力,提供可解释、确定性的自动化评测。
+ 以对话、记忆记录、行动轨迹、文件为证据,自动评估六项长期记忆能力,
+ 一键产出 JSON / Markdown 报告与多维对比雷达图。
