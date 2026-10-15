@@ -8,3 +8,5 @@ results_semantic/
 demo/
 .venv/
 venv/
+
+.idea/
