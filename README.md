@@ -52,6 +52,10 @@ python scripts/make_demo.py --out demo
 # 生成样例数据集到指定位置
 membench init --out mydata
 
+# 批量扩展数据集(确定性生成器,默认 120 例)
+python scripts/gen_dataset.py --per 20
+membench run --dataset data/generated/episodes.json
+
 # 用自定义数据集、指定智能体、指定输出目录运行
 membench run --dataset mydata/episodes.json --agents mock_good,mock_weak --out myresults
 ```
@@ -86,12 +90,14 @@ mem-bench/
 │   ├── agents/          # 智能体适配器(模拟 + KylinBot/HermesAgent 骨架)
 │   └── data/            # 内置样例数据集
 ├── data/samples/        # 可编辑样例数据集副本
+├── data/generated/      # 生成器产出的扩展集(120 例)
 ├── docs/DESIGN.md       # 方案说明文档
 ├── docs/openKylin.md    # openKylin 集成与安装说明
 ├── docs/作品介绍.md/.pdf # 作品介绍文档(提交用 PDF)
 ├── tests/               # 测试
 ├── scripts/build_deb.sh # .deb 打包脚本
 ├── scripts/make_demo.py # 演示录屏脚本
+├── scripts/gen_dataset.py # 数据集生成器(批量扩展)
 └── debian/control       # Debian 打包元数据
 ```
 

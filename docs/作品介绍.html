@@ -90,13 +90,18 @@ a { color: #2b6cb0; text-decoration: none; }
 <td>100%</td>
 </tr>
 <tr>
+<td>数据集生成器(批量扩展至 120 例)</td>
+<td>已完成</td>
+<td>100%</td>
+</tr>
+<tr>
 <td>真实智能体适配器(KylinBot / Hermes Agent)</td>
 <td>骨架完成,含 OpenAI 兼容 HTTP 调用与注册机制</td>
 <td>约 70%</td>
 </tr>
 </tbody></table>
 <p><strong>未实现 / 待完善项</strong>:</p>
-<ol><li><strong>真实智能体的 <code>memory_snapshot()</code></strong> —— 需按各框架的实际记忆存储(向量库 / 知识库)覆盖实现,读出当前「可回忆」的键值;这是接入真实智能体唯一待定制点,完成程度约 70%。</li><li><strong>更强语义判分器</strong> —— 嵌入相似度与 LLM-as-judge 仅预留接口,未内置默认实现(默认路径为确定性匹配,是有意的取舍)。</li><li><strong>评测数据集规模</strong> —— 内置 13 个用例覆盖六维(每维 ≥2 例),可按「事实协议」用脚本批量扩充。</li></ol>
+<ol><li><strong>真实智能体的 <code>memory_snapshot()</code></strong> —— 需按各框架的实际记忆存储(向量库 / 知识库)覆盖实现,读出当前「可回忆」的键值;这是接入真实智能体唯一待定制点,完成程度约 70%。</li><li><strong>更强语义判分器</strong> —— 嵌入相似度与 LLM-as-judge 仅预留接口,未内置默认实现(默认路径为确定性匹配,是有意的取舍)。</li><li><strong>评测数据集规模</strong> —— 内置 13 个精心设计的示例用例;另提供确定性生成器 <code>scripts/gen_dataset.py</code>,已生成 120 例扩展集(六维各 20 例),可按需扩展到更大规模。</li></ol>
 <h2>七、快速上手</h2>
 <pre><code># 安装(核心零第三方依赖;雷达图需 matplotlib)
 pip install -e .
