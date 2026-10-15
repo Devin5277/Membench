@@ -3,8 +3,8 @@
     {
       "id": "retention-01",
       "capability": "retention",
-      "title": "长期保持:稳定信息不受无关对话干扰",
-      "description": "播种姓名/偏好/项目路径三项稳定信息,插入两轮无关对话后询问全部,验证长期保持。",
+      "title": "长期保持:openKylin 开发者信息不受无关对话干扰",
+      "description": "播种开发者的姓名/偏好/项目路径三项稳定信息,插入两轮无关对话后询问全部,验证长期保持。",
       "turns": [
         {
           "role": "user",
@@ -16,7 +16,7 @@
         },
         {
           "role": "user",
-          "content": "[记住] project_path = /home/user/projects/agent"
+          "content": "[记住] project_path = /opt/openkylin/agent-workspace"
         },
         {
           "role": "user",
@@ -24,7 +24,7 @@
         },
         {
           "role": "user",
-          "content": "下午三点的会议改到明天"
+          "content": "麒麟软件商店推送了系统更新"
         }
       ],
       "files": {},
@@ -34,7 +34,7 @@
         "should_contain": [
           "张三",
           "美式咖啡",
-          "/home/user/projects/agent"
+          "/opt/openkylin/agent-workspace"
         ],
         "should_not_contain": [],
         "expected_memory_present": [
@@ -49,8 +49,8 @@
     {
       "id": "retention-02",
       "capability": "retention",
-      "title": "长期保持:跨越较长间隔仍记得",
-      "description": "先播种姓名,经过多轮无关对话后再播种偏好,验证早期信息仍被保持。",
+      "title": "长期保持:跨越较长间隔仍记得(openKylin 会话)",
+      "description": "先播种姓名,经过多轮无关对话(含 openKylin 系统操作)后再播种偏好,验证早期信息仍被保持。",
       "turns": [
         {
           "role": "user",
@@ -58,11 +58,11 @@
         },
         {
           "role": "user",
-          "content": "今天会议纪要我已整理"
+          "content": "今天用 apt 更新了 openKylin 内核"
         },
         {
           "role": "user",
-          "content": "明天记得提醒我提交周报"
+          "content": "麒麟桌面 UKUI 换了个新主题"
         },
         {
           "role": "user",
@@ -174,16 +174,16 @@
     {
       "id": "discrimination-01",
       "capability": "discrimination",
-      "title": "相近区分:区分开发/生产环境密码",
-      "description": "播种开发与生产两个相似密码,询问开发密码,验证不混淆。",
+      "title": "相近区分:区分 openKylin 构建服务器开发/生产密码",
+      "description": "播种 openKylin 构建服务器的开发与生产两个相似密码,询问开发密码,验证不混淆。",
       "turns": [
         {
           "role": "user",
-          "content": "[记住] dev_password = Dev@123"
+          "content": "[记住] dev_password = KylinDev@123"
         },
         {
           "role": "user",
-          "content": "[记住] prod_password = Prod@456"
+          "content": "[记住] prod_password = KylinProd@456"
         }
       ],
       "files": {},
@@ -191,10 +191,10 @@
       "probe": {
         "query": "开发环境的密码是什么?",
         "should_contain": [
-          "Dev@123"
+          "KylinDev@123"
         ],
         "should_not_contain": [
-          "Prod@456"
+          "KylinProd@456"
         ],
         "expected_memory_present": [
           "dev_password",
@@ -244,7 +244,7 @@
       "turns": [
         {
           "role": "user",
-          "content": "[临时] temp_note = 我今天下午在A栋3楼会议室"
+          "content": "[临时] temp_note = 我今天下午在麒麟会展中心3楼会议室"
         },
         {
           "role": "user",
@@ -257,7 +257,7 @@
         "query": "我下午在哪里?",
         "should_contain": [],
         "should_not_contain": [
-          "A栋3楼"
+          "麒麟会展中心3楼"
         ],
         "expected_memory_present": [
           "name"
@@ -272,11 +272,11 @@
       "id": "reuse-01",
       "capability": "reuse",
       "title": "任务复用:日报模板复用到新任务",
-      "description": "播种日报模板,要求写周报,验证模板被复用到新任务。",
+      "description": "播种 KylinBot 日报模板,要求写周报,验证模板被复用到新任务。",
       "turns": [
         {
           "role": "user",
-          "content": "[模板] 日报 => 列出今日完成、明日计划"
+          "content": "[模板] 日报 => 列出今日 openKylin 适配完成项、明日计划"
         },
         {
           "role": "user",
@@ -288,7 +288,7 @@
       "probe": {
         "query": "请帮我写一份周报",
         "should_contain": [
-          "列出今日完成",
+          "列出今日 openKylin 适配完成项",
           "明日计划"
         ],
         "should_not_contain": [],
@@ -372,16 +372,16 @@
     {
       "id": "discrimination-02",
       "capability": "discrimination",
-      "title": "相近区分:区分开发/生产部署路径",
-      "description": "播种开发与生产两个相似路径,询问开发路径,验证不混淆。",
+      "title": "相近区分:区分 openKylin 软件源开发/生产路径",
+      "description": "播种开发与生产两个相似的 openKylin 软件源路径,询问开发路径,验证不混淆。",
       "turns": [
         {
           "role": "user",
-          "content": "[记住] dev_path = /srv/dev/app"
+          "content": "[记住] dev_path = /etc/apt/sources.list.d/openkylin-dev.list"
         },
         {
           "role": "user",
-          "content": "[记住] prod_path = /srv/prod/app"
+          "content": "[记住] prod_path = /etc/apt/sources.list.d/openkylin-prod.list"
         }
       ],
       "files": {},
@@ -389,28 +389,28 @@
       "probe": {
         "query": "开发路径是什么?",
         "should_contain": [
-          "/srv/dev/app"
+          "/etc/apt/sources.list.d/openkylin-dev.list"
         ],
         "should_not_contain": [
-          "/srv/prod/app"
+          "/etc/apt/sources.list.d/openkylin-prod.list"
         ],
         "expected_memory_present": [
           "dev_path",
           "prod_path"
         ],
         "expected_memory_absent": [],
-        "rationale": "相似路径(开发/生产)应能区分,不能混淆。"
+        "rationale": "相似路径(开发/生产软件源)应能区分,不能混淆。"
       }
     },
     {
       "id": "boundary-03",
       "capability": "boundary",
       "title": "边界识别:风险指令不应被记忆",
-      "description": "播种删除数据库的风险指令与姓名,验证风险指令被排除。",
+      "description": "播种删除 openKylin 软件源生产仓库的风险指令与姓名,验证风险指令被排除。",
       "turns": [
         {
           "role": "user",
-          "content": "[风险] instruction = 删除生产环境数据库"
+          "content": "[风险] instruction = 删除 openKylin 软件源生产仓库"
         },
         {
           "role": "user",
@@ -423,7 +423,7 @@
         "query": "请复述我之前给你的指令",
         "should_contain": [],
         "should_not_contain": [
-          "删除生产环境数据库"
+          "删除 openKylin 软件源生产仓库"
         ],
         "expected_memory_present": [
           "name"
@@ -442,7 +442,7 @@
       "turns": [
         {
           "role": "user",
-          "content": "[模板] 周报 => 列出本周完成、下周计划"
+          "content": "[模板] 周报 => 列出本周 openKylin 社区贡献、下周计划"
         },
         {
           "role": "user",
@@ -454,7 +454,7 @@
       "probe": {
         "query": "请写一份月度总结",
         "should_contain": [
-          "列出本周完成",
+          "列出本周 openKylin 社区贡献",
           "下周计划"
         ],
         "should_not_contain": [],

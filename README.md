@@ -87,6 +87,8 @@ mem-bench/
 │   └── data/            # 内置样例数据集
 ├── data/samples/        # 可编辑样例数据集副本
 ├── docs/DESIGN.md       # 方案说明文档
+├── docs/openKylin.md    # openKylin 集成与安装说明
+├── docs/作品介绍.md/.pdf # 作品介绍文档(提交用 PDF)
 ├── tests/               # 测试
 ├── scripts/build_deb.sh # .deb 打包脚本
 ├── scripts/make_demo.py # 演示录屏脚本
