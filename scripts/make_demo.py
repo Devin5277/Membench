@@ -55,14 +55,14 @@ def _episode_table_html(report) -> str:
     )
 
 
-def build_html(reports, episodes, seconds: int, title: str) -> str:
+def build_html(reports, episodes, seconds: int, title: str, radar_ok: bool = True) -> str:
     slides = []
     agents = "、".join(r.agent_name for r in reports)
 
     slides.append(f"""
     <section class="slide" data-title="标题">
-      <h1>智能体长期记忆能力<br>自动化评测 Benchmark</h1>
-      <p class="sub">面向 openKylin 操作系统 · 六维能力 · 可解释自动评分</p>
+      <h1>智能体长期记忆<br>可解释评测框架</h1>
+      <p class="sub">面向 openKylin 操作系统 · 六维能力 · 确定性可解释评分</p>
       <p class="small">评测对象:{agents}</p>
     </section>""")
 
@@ -88,11 +88,12 @@ def build_html(reports, episodes, seconds: int, title: str) -> str:
       </ol>
     </section>""")
 
-    slides.append("""
-    <section class="slide" data-title="雷达图">
-      <h2>六维能力对比雷达图</h2>
-      <img src="radar.png" alt="雷达图" class="radar">
-    </section>""")
+    if radar_ok:
+        slides.append("""
+        <section class="slide" data-title="雷达图">
+          <h2>六维能力对比雷达图</h2>
+          <img src="radar.png" alt="雷达图" class="radar">
+        </section>""")
 
     slides.append(f"""
     <section class="slide" data-title="得分总览">
@@ -174,11 +175,16 @@ def main() -> int:
     episodes, reports = run_benchmark(dataset, agent_names, scorer=args.scorer)
 
     radar_path = out / "radar.png"
-    draw_radar(reports, radar_path, title=args.title)
+    radar_ok = True
+    try:
+        draw_radar(reports, radar_path, title=args.title)
+    except ImportError:
+        radar_ok = False
+        print("[警告] 未安装 matplotlib,已跳过雷达图(其余演示页不受影响)。")
     write_json(out / "report.json", build_payload(episodes, reports, {"agents": agent_names}))
     write_markdown(out / "report.md", reports)
 
-    html = build_html(reports, episodes, args.seconds, args.title)
+    html = build_html(reports, episodes, args.seconds, args.title, radar_ok=radar_ok)
     (out / "index.html").write_text(html, encoding="utf-8")
 
     print(f"演示已生成: {out.resolve()}")
